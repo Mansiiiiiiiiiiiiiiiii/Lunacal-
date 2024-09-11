@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me and Gallery Widget</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Empty left section -->
+  <div class="left-section"></div>
+
+  <!-- Right section with widgets -->
+  <div class="right-section">
+
+    <!-- About Me Widget -->
+    <div class="widget about-widget">
+      <div class="question-mark">?</div> <!-- Question Mark in About Me -->
+      <div class="tab-box">
+        <ul class="tabs">
+          <li class="active" data-tab="about">About Me</li>
+          <li data-tab="experience">Experience</li>
+          <li data-tab="recommended">Recommended</li>
+        </ul>
+      </div>
+      <div class="tab-content">
+        <div class="about-text active" id="about">
+          Hello! I’m Dave, your sales rep here from Salesforce. I’ve been working at this awesome company for 3 years now.
+          <br><br>
+          I was born and raised in Albany, NY & have been living in Santa Carla for the past 10 years with my wife Tiffany and my 4-year-old twin daughters - Emma and Ella. Both of them are just starting school, so my calendar is usually blocked between 9-10 AM. This is a...
+        </div>
+        <div class="experience-text" id="experience">
+          I've been working at Salesforce for 3 years, focusing on enterprise software sales. My expertise lies in understanding customer requirements and providing tailored solutions.
+        </div>
+        <div class="recommended-text" id="recommended">
+          I highly recommend using Salesforce tools for managing large-scale projects. The platform has helped me and my clients achieve significant productivity improvements.
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Widget -->
+    <div class="widget gallery-widget">
+      <div class="question-mark">?</div> <!-- Question Mark in Gallery -->
+      <div class="gallery-header">
+        <div class="gallery-title">Gallery</div>
+        <div class="gallery-controls">
+          <button class="add-image-btn">+ Add Image</button>
+          <div class="nav-arrows">
+            <div class="arrow left-arrow" id="previous-arrow">&larr;</div>
+            <div class="arrow right-arrow" id="next-arrow">&rarr;</div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery-images">
+        <!-- Images will be added dynamically here -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -2,6 +2,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const tabs = document.querySelectorAll('.tabs li');
   const tabContents = document.querySelectorAll('.tab-content div');
 
+  // Flash highlight function for a fraction of a second
+  function flashHighlight(element) {
+    element.classList.add('highlighted');
+    setTimeout(() => {
+      element.classList.remove('highlighted');
+    }, 500); // Highlight for 500 milliseconds (0.5 sec)
+  }
+
+  // Tab navigation with flash highlight on click
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       tabs.forEach(t => t.classList.remove('active'));
@@ -10,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
       tab.classList.add('active');
       const tabTarget = tab.getAttribute('data-tab');
       document.getElementById(tabTarget).classList.add('active');
+
+      // Flash the clicked tab
+      flashHighlight(tab);
     });
   });
 
@@ -20,8 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const rightArrow = document.getElementById('next-arrow');
 
   let images = []; // Array to store the image elements
-  let currentIndex = 0; // To keep track of which image is currently displayed
+  let currentIndex = 0; // To keep track of the current image displayed
+  const maxImages = 4; // Maximum number of images
 
+  // Function to update gallery display
   function updateGallery() {
     galleryImagesContainer.innerHTML = ''; // Clear the gallery first
 
@@ -29,25 +43,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
     imagesToShow.forEach(image => {
       galleryImagesContainer.appendChild(image); // Append each image
+      
     });
+
+    // Check if there's space for adding a new image (after clicking right arrow)
+    if (images.length < currentIndex + 3) {
+      const emptySlot = document.createElement('div');
+      emptySlot.classList.add('image-placeholder'); // Style the empty slot if needed
+      galleryImagesContainer.appendChild(emptySlot);
+    }
   }
 
+  // Image upload handler (limit to max 4 images)
   function handleImageUpload(event) {
     const files = event.target.files;
+
+    if (images.length >= maxImages) {
+      alert("You can only upload a maximum of 4 images.");
+      return;
+    }
 
     for (let file of files) {
       const reader = new FileReader();
       reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        images.push(img); // Add the image to the array
-        updateGallery(); // Update the gallery
+        if (images.length < maxImages) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          images.push(img); // Add the image to the array
+          updateGallery(); // Update the gallery
+        }
       };
       reader.readAsDataURL(file);
     }
   }
 
+  // Add image button event
   addImageBtn.addEventListener('click', () => {
+    flashHighlight(addImageBtn); // Flash Add Image button
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -62,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (currentIndex > 0) {
       currentIndex--;
       updateGallery();
+      flashHighlight(leftArrow); // Flash left arrow
     }
   });
 
@@ -69,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (currentIndex < images.length - 3) {
       currentIndex++;
       updateGallery();
+      flashHighlight(rightArrow); // Flash right arrow
     }
   });
 });

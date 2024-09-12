@@ -51,12 +51,7 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for the horizontal line */
-.horizontal-line {
-  height: 2px; /* Thickness of the line */
-  background-color: gray; /* Color of the line */
-  width: 100%; /* Make the line span the full width of the container */
-}
+
 
 /* Question Mark in both widgets */
 .question-mark {
@@ -77,26 +72,34 @@ body {
 
 /* Tab Box Styling */
 .tab-box {
-  width: 100%;
-  height: 49px;
+  width: 614px;
+  height: 62px;
   background-color: #171717;
-  border-radius: 23px 0px 0px 0px;
+  border-radius: 23px;
   box-shadow: inset 0px 4.96px 12.4px 2.48px #00000040;
   display: flex;
-  align-items: center;
+  width: 100%;
   justify-content: center;
   margin-bottom: 20px;
+  top: 113px;
+  left: 975px;
+  border-radius: 23px;
+  box-shadow: 0px 4.96px 12.4px 2.48px #00000040 inset;
+  align-items: center;
+
 }
 
 /* Tabs (About Me, Experience, Recommended) */
 .tabs {
   display: flex;
   list-style-type: none;
-  gap: 10px;
+  gap: 140px;
+  
 }
 
 .tabs li {
-  padding: 10px 20px;
+  padding: 15px 30px;
+  font-size: 16px;
   background-color: #333;
   color: white;
   border-radius: 23px;
@@ -105,7 +108,8 @@ body {
 }
 
 .tabs li:hover {
-  background-color: #444; /* Light gray color on hover */
+  background-color: #444;
+   /* Light gray color on hover */
 }
 
 .tabs li.active {
@@ -115,8 +119,12 @@ body {
 /* About Me Text Section */
 .tab-content {
   position: relative;
-  
+  width: 100%;
+  overflow: hidden;
+  height: 175px;
 }
+
+
 
 .tab-content-item {
   display: none;
@@ -144,21 +152,41 @@ body {
   background-color: #969696;
   color: #000; /* Black text color */
   overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 100%; /* Initially place off-screen */
+  opacity: 0;
+  transition: all 0.5s ease;
 }
 
 .tab-content div.active {
   display: block;
+  left: 0; /* Bring active content into view */
+  opacity: 1;
 }
 
-
+.tab-content div.inactive {
+  left: -100%; /* Move inactive content out of view */
+  opacity: 0;
+}
 
 /* Gallery Widget */
 .gallery-widget {
   background-color: #606060;
   position: relative;
   padding: 20px;
+  display: flex;
   border-radius: 10px;
+  
+  justify-content: space-between;
 }
+.image-placeholder {
+  width: 220px;
+  height: 220px;
+  border-radius: 15px;
+  background-color: #ccc;
+}
+
 
 /* Gallery Header */
 .gallery-header {
@@ -173,9 +201,12 @@ body {
   font-size: 20px;
   color: white;
   margin: 0;
-  padding: 20px;
+  padding-left: 40px;
   background-color: #000;
   border-radius: 12%;
+  padding-right: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 /* Gallery Controls */
@@ -187,16 +218,26 @@ body {
   justify-content: space-between;
 }
 
-/* Add Image Button */
+
+
+
 .add-image-btn {
   background-color: #333;
   color: #fff;
   border-radius: 50px;
-  padding: 10px 20px;
+  padding-right: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 40px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+
+  /* Add a white shadow to the top */
+  box-shadow: 0 -4px 10px rgba(255, 255, 255, 0.7);
 }
+
+
 
 .add-image-btn:hover {
   background-color: #555;
@@ -209,8 +250,8 @@ body {
 }
 
 .arrow {
-  width: 30px;
-  height: 30px;
+  width: 40px; /* Increased width */
+  height: 40px; /* Increased height */
   background-color: #333;
   color: #fff;
   border-radius: 50%;
@@ -218,7 +259,11 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  font-size: 20px; /* Adjust font size to fit new size */
+  box-shadow: 0px -2px 4px rgba(255, 255, 255, 0.3); /* Very light white shadow */
 }
+
+
 
 .arrow:hover {
   background-color: #555;
@@ -229,8 +274,10 @@ body {
   display: flex;
   gap: 10px;
   margin-top: 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   overflow: hidden;
+  width: 100%;
+  transition: transform 0.5s ease; /* Smooth sliding transition */
 }
 
 .gallery-images img {
@@ -247,14 +294,18 @@ body {
   filter: grayscale(0%);
 }
 
+button, li {
+  transition: background-color 0.3s ease; /* For smooth flash and return */
+}
+
 /* Highlight Effect */
 .highlight {
   background-color: lightblue; /* Light blue color */
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-/* Responsive Design for Laptops */
-@media (max-width: 1024px) {
+/* Responsive Design for Laptops and Tablets (Above 768px) */
+@media (min-width: 769px) and (max-width: 1024px) {
   .widget {
     width: 100%;
     max-width: 700px;
@@ -279,57 +330,28 @@ body {
   }
 }
 
-/* Responsive Design for Tablets */
-@media (max-width: 768px) {
+/* For larger desktops (Above 1024px) */
+@media (min-width: 1025px) {
   .widget {
     width: 100%;
-    max-width: 500px;
+    max-width: 1000px; /* For larger desktops, allow a larger width */
   }
 
   .gallery-images img {
-    width: 150px; /* Smaller size for responsiveness */
-    height: 150px; /* Smaller size for responsiveness */
+    width: 220px; /* Default size for desktops */
+    height: 220px;
   }
 
   .right-section {
-    padding: 5px;
-    gap: 5px;
+    padding: 20px;
+    gap: 20px;
   }
 
   .tabs li {
-    padding: 6px 12px;
+    padding: 10px 20px;
   }
 
   .tab-content div {
-    font-size: 16px;
+    font-size: 20px;
   }
 }
-
-/* Responsive Design for Mobile */
-@media (max-width: 480px) {
-  .widget {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .gallery-images img {
-    width: 120px; /* Smaller size for responsiveness */
-    height: 120px; /* Smaller size for responsiveness */
-  }
-
-  .right-section {
-    padding: 5px;
-    gap: 5px;
-  }
-
-  .tabs li {
-    padding: 4px 8px;
-    font-size: 14px;
-  }
-
-  .tab-content div {
-    font-size: 14px;
-  }
-}
-
-/*  */
